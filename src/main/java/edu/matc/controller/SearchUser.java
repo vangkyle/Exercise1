@@ -25,7 +25,7 @@ public class SearchUser extends HttpServlet {
 
         UserData userData = new UserData();
         if (req.getParameter("submit").equals("search")) {
-            req.setAttribute("users", userData.getByLastName(req.getParameter("searchTerm")));
+            req.setAttribute("users", userData.getUserByLastName(req.getParameter("searchTerm")));
         } else {
             req.setAttribute("users", userData.getAllUsers());
         }

@@ -1,8 +1,5 @@
 package edu.matc.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -11,23 +8,10 @@ import java.time.temporal.ChronoUnit;
  *
  * @author pwaite
  */
-@Entity
-@Table(name = "users")
 public class User {
-
-    @Column(name = "first_name")
     private String firstName;
-
-    @Column(name = "last_name")
     private String lastName;
-
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    @Column(name = "id")
     private String userid;
-
-    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
 
@@ -40,13 +24,15 @@ public class User {
     /**
      * Instantiates a new User.
      *
-     * @param firstName the first name
-     * @param lastName the last name
+     * @param firstName   the first name
+     * @param lastName    the last name
+     * @param userid      the userid
      * @param dateOfBirth the date of birth
      */
-    public User(String firstName, String lastName, LocalDate dateOfBirth) {
+    public User(String firstName, String lastName, String userid, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.userid = userid;
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -105,7 +91,6 @@ public class User {
         this.userid = userid;
     }
 
-
     /**
      * Gets date of birth.
      *
@@ -127,7 +112,8 @@ public class User {
     public int calculateAge() {
         LocalDate now = LocalDate.now();
         long age = ChronoUnit.YEARS.between(dateOfBirth, now);
-        return (int)age;
+
+        return (int) age;
     }
 
     @Override
@@ -139,4 +125,6 @@ public class User {
                 ", dateOfBirth=" + dateOfBirth +
                 '}';
     }
+
+
 }

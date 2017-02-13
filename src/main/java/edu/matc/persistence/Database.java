@@ -1,6 +1,7 @@
 package edu.matc.persistence;
 
 import org.apache.log4j.*;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -35,13 +36,13 @@ public class Database {
         try {
             properties.load (this.getClass().getResourceAsStream("/database.properties"));
         } catch (IOException ioe) {
-            logger.info("IOException... Cannot load the properties file", ioe);
-            logger.trace("Trace message...", ioe);
+            logger.info("Database.loadProperties()...Cannot load the properties file" + ioe);
+            logger.trace("IOException...Print stack trace" + ioe);
             //System.out.println("Database.loadProperties()...Cannot load the properties file");
             //ioe.printStackTrace();
         } catch (Exception e) {
-            logger.info("Exception...", e);
-            logger.trace("Trace message...", e);
+            logger.info("Database.loadProperties()..." + e);
+            logger.trace("Exception...Print stack trace" + e);
             //System.out.println("Database.loadProperties()..." + e);
             //e.printStackTrace();
         }
@@ -76,7 +77,7 @@ public class Database {
             try {
                 connection.close();
             } catch (SQLException e) {
-                logger.info("SQLException... Cannot close connection", e);
+                logger.info("Cannot close connection" + e);
                 //System.out.println("Cannot close connection" + e);
             }
         }
