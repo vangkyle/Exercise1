@@ -1,5 +1,8 @@
 package edu.matc.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -8,11 +11,23 @@ import java.time.temporal.ChronoUnit;
  *
  * @author pwaite
  */
-@SuppressWarnings("ALL")
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "id")
     private String userid;
+
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
 
@@ -24,15 +39,14 @@ public class User {
 
     /**
      * Instantiates a new User.
-     *  @param firstName the first name
-     * @param lastName  the last name
-     * @param userid    the userid
+     *
+     * @param firstName the first name
+     * @param lastName the last name
      * @param dateOfBirth the date of birth
      */
-    public User(String firstName, String lastName, String userid, LocalDate dateOfBirth) {
+    public User(String firstName, String lastName, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userid = userid;
         this.dateOfBirth = dateOfBirth;
     }
 

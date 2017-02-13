@@ -1,5 +1,6 @@
 package edu.matc.entity;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -13,21 +14,22 @@ import static org.junit.Assert.*;
 public class UserTest {
     User user;
 
+    @Before
+    public void setUp() {
+        user = new User("Test", "User", getLocalDate("08-01-2000"));
+    }
+
     @Test
     public void calculateAge() throws Exception {
-        LocalDate myDate = getLocalDate();
-
-        user = new User("Test", "User", "6", myDate);
-
         int age = user.calculateAge();
         // Goal is to make sure the calculateAge() method works
         assertEquals("Age calculation failed", 17, age);
 
     }
 
-    private LocalDate getLocalDate() {
+    private LocalDate getLocalDate(String inputDate) {
         DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return LocalDate.parse("08-01-2000", DATE_FORMAT);
+        return LocalDate.parse(inputDate, DATE_FORMAT);
     }
 
 }
